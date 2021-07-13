@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
+import { onMount, createSignal } from 'solid-js'
+import { styled } from 'solid-styled-components'
 
 import { getImageUrls } from './api'
 import Modal from './Modal'
 
-const Header = styled.header`
+const Header = styled('header')`
   display: flex;
   justify-content: center;
 `
 
-const ImageGrid = styled.div`
+const ImageGrid = styled('div')`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -21,20 +21,18 @@ const ImageGrid = styled.div`
   }
 `
 
-const ModalImage = styled.img`
+const ModalImage = styled('img')`
   width: 700px;
   height: 700px;
 `
 
 export default function App() {
-  const [images, setImages] = useState(null)
-  const [selectedImage, setSelectedImage] = useState(null)
+  const [images, setImages] = createSignal(null)
+  const [selectedImage, setSelectedImage] = createSignal(null)
 
-  useEffect(() => {
-    ;(async () => {
-      setImages(await getImageUrls())
-    })()
-  }, [])
+  onMount(async () => {
+    setImages(await getImageUrls())
+  })
 
   return (
     <div>
@@ -43,8 +41,8 @@ export default function App() {
       </Header>
       <main>
         <ImageGrid>
-          {images
-            ? images.map((url) => (
+          {images()
+            ? images().map((url) => (
                 <img
                   key={url}
                   src={url}
@@ -58,16 +56,15 @@ export default function App() {
         </ImageGrid>
       </main>
       <Modal
-        preventScroll
-        isOpen={!!selectedImage}
+        isOpen={selectedImage()}
         onClose={() => {
           setSelectedImage(null)
         }}
       >
         <ModalImage
-          key={selectedImage}
-          src={selectedImage}
-          alt={selectedImage}
+          key={selectedImage()}
+          src={selectedImage()}
+          alt={selectedImage()}
         />
       </Modal>
     </div>

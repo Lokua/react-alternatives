@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
+import { createEffect } from 'solid-js'
+import { styled } from 'solid-styled-components'
 
-const Dialog = styled.dialog`
+const Dialog = styled('dialog')`
   z-index: 2;
   position: absolute;
   top: 0;
@@ -27,7 +27,7 @@ const Dialog = styled.dialog`
 `
 
 export default function Modal({ isOpen, onClose, children }) {
-  useEffect(() => {
+  createEffect((isOpen) => {
     if (isOpen) {
       const onKeyUp = (e) => {
         if (e.key === 'Escape') {
@@ -41,7 +41,7 @@ export default function Modal({ isOpen, onClose, children }) {
         document.removeEventListener('keyup', onKeyUp)
       }
     }
-  }, [isOpen])
+  }, isOpen)
 
   return (
     <Dialog open={isOpen}>
