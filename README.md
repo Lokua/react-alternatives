@@ -1,1 +1,1 @@
-# frontend-starter
+# React Alternatives
