@@ -1,11 +1,5 @@
-function h(type, props, ...children) {
-  return {
-    type,
-    props,
-    children,
-  }
-}
+import { h, createElement } from './lib'
 
-const list = h('ul', {}, h('li', {}, 'Item 1'), h('li', {}, 'Item 2'))
+const list = h('ul', {}, [h('li', {}, 'Item 1'), h('li', {}, 'Item 2')])
 
-console.log(list)
+document.getElementById('root').appendChild(createElement(list))
