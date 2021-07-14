@@ -1,14 +1,18 @@
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
-import { render } from 'solid-js/web'
-import App from './App'
-
-renderApp()
-
-function renderApp() {
-  render(() => <App />, global.document.getElementById('root'))
+const list = {
+  type: 'ul',
+  props: {},
+  children: [
+    {
+      type: 'li',
+      props: {},
+      children: 'Item 1',
+    },
+    {
+      type: 'li',
+      props: {},
+      children: 'Item 2',
+    },
+  ],
 }
 
-if (module.hot) {
-  module.hot.accept('./App', renderApp)
-}
+console.log(list)
