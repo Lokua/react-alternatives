@@ -26,12 +26,12 @@ const Dialog = styled('dialog')`
   }
 `
 
-export default function Modal({ isOpen, onClose, children }) {
+export default function Modal(props) {
   createEffect((isOpen) => {
     if (isOpen) {
       const onKeyUp = (e) => {
         if (e.key === 'Escape') {
-          onClose()
+          props.onClose()
         }
       }
 
@@ -41,12 +41,12 @@ export default function Modal({ isOpen, onClose, children }) {
         document.removeEventListener('keyup', onKeyUp)
       }
     }
-  }, isOpen)
+  }, props.isOpen)
 
   return (
-    <Dialog open={isOpen}>
-      <button onClick={onClose}>&times;</button>
-      {children}
+    <Dialog open={props.isOpen}>
+      <button onClick={props.onClose}>&times;</button>
+      {props.children}
     </Dialog>
   )
 }
