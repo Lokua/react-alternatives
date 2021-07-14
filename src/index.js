@@ -1,18 +1,11 @@
-const list = {
-  type: 'ul',
-  props: {},
-  children: [
-    {
-      type: 'li',
-      props: {},
-      children: 'Item 1',
-    },
-    {
-      type: 'li',
-      props: {},
-      children: 'Item 2',
-    },
-  ],
+function h(type, props, ...children) {
+  return {
+    type,
+    props,
+    children,
+  }
 }
+
+const list = h('ul', {}, h('li', {}, 'Item 1'), h('li', {}, 'Item 2'))
 
 console.log(list)
