@@ -10,14 +10,6 @@ module.exports = (api) => {
           pragma: 'h',
         },
       ],
-
-      // [
-      //   'babel-plugin-jsx-pragmatic',
-      //   {
-      //     module: './src/step-4/lib',
-      //     import: 'h',
-      //   },
-      // ],
     ],
   }
 }
