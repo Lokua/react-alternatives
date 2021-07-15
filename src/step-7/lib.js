@@ -71,6 +71,29 @@ export function render(node, mountNode) {
 
   bus.on('update', () => {
     const next = createElement(node)
-    mountNode.children[0].replaceWith(next)
+    update(mountNode, next, prev)
   })
+}
+
+function update(parent, newNode, oldNode, index = 0) {
+  if (!oldNode) {
+    parent.appendChild(newNode)
+  } else if (!newNode) {
+    parent.removeChild(parent.childNodes[index])
+  } else if (newNode.type !== oldNode.type) {
+    parent.replaceChild(newNode, parent.childNodes[index])
+  } else {
+    for (
+      let i = 0;
+      i < Math.max(newNode.children.length, oldNode.children.length);
+      i++
+    ) {
+      update(
+        parent.childNodes[index],
+        newNode.children[i],
+        oldNode.children[i],
+        i,
+      )
+    }
+  }
 }

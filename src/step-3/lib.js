@@ -13,9 +13,9 @@ export function createElement(node) {
 
   const element = document.createElement(node.type)
 
-  node.children
-    .map(createElement)
-    .forEach((child) => element.appendChild(child))
+  node.children.map(createElement).forEach((child) => {
+    element.appendChild(child)
+  })
 
   return element
 }
